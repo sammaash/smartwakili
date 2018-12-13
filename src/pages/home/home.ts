@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, ModalController, AlertController } from 'ionic-angular';
 import * as moment from 'moment';
 import { GlobalProvider } from '../../providers/global/global';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 
 
 
@@ -12,7 +13,7 @@ import { GlobalProvider } from '../../providers/global/global';
 })
 export class HomePage {
 	
-	eventSource = [];
+
 	viewTitle: string;
 	selectedDay = new Date();
 
@@ -22,8 +23,18 @@ export class HomePage {
   currentDate: new Date()
 	
 	};
-  constructor(public navCtrl: NavController, private modalCtrl: ModalController, private alertCtrl: AlertController, public globals: GlobalProvider) { }
+  eventSource: AngularFireList<any>;     
  
+  constructor(public navCtrl: NavController, private modalCtrl: ModalController, private alertCtrl: AlertController, public globals: GlobalProvider, public afd: AngularFireDatabase) { }
+ 
+  ionViewDidLoad(){
+       this.eventSource = this.afd.list(`/budget/`,ref => ref.orderByChild('event_title2').equalTo("26789"));
+        Object.keys(this.eventSource).forEach(key=> {
+    console.log(this.eventSource[key]);     
+});
+      
+    
+}
   addEvent() {
     let modal = this.modalCtrl.create('EventmodPage', {selectedDay: this.selectedDay});
     modal.present();
@@ -70,4 +81,5 @@ export class HomePage {
   onTimeSelected(event) {
     this.selectedDay = event.selectedTime;
   }
+   
 }
