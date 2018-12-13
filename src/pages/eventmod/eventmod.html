@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-buttons start>
+      <button ion-button icon-only (click)="cancel()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Event Details</ion-title>
+  </ion-navbar>
+</ion-header>
+ 
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-input type="text" placeholder="Title" [(ngModel)]="event_title"></ion-input>
+    </ion-item>
+    
+      <ion-input type="text" hidden placeholder="Title" [(ngModel)]="event_title2"></ion-input>
+    
+    
+    <ion-item>
+      <ion-input type="text" placeholder="Party A" [(ngModel)]="event_partya"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" placeholder="Party B" [(ngModel)]="event_partyb"></ion-input>
+    </ion-item>
+    <div radio-group [(ngModel)]="event_purpose">
+    Select Purpose:
+    <ion-col text-center>
+  <ion-item>
+    <ion-label color="men">Mention</ion-label>
+    <ion-radio value="mention" checked></ion-radio>
+    </ion-item>
+  <ion-item>
+    <ion-label color="app">Application</ion-label>
+    <ion-radio value="app" ></ion-radio>
+  </ion-item>
+  <ion-item>
+    <ion-label color="hear">hearing</ion-label>
+    <ion-radio value="hearing" ></ion-radio>
+  </ion-item>
+  <ion-item>
+    <ion-label color="judge">judgement</ion-label>
+    <ion-radio value="judge" ></ion-radio>
+  </ion-item>
+  <ion-item>
+    <ion-label color="rule">ruling</ion-label>
+    <ion-radio value="ruling" ></ion-radio>
+  </ion-item>  
+    </ion-col>
+    </div>
+    
+
+ 
+    <ion-item hidden>
+      <ion-label>Start</ion-label>
+      <ion-datetime displayFormat="MM/DD/YYYY HH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="event.startTime" [min]="minDate"></ion-datetime>
+    </ion-item>
+ 
+    <ion-item hidden>
+      <ion-label>End</ion-label>
+      <ion-datetime displayFormat="MM/DD/YYYY HH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="event.endTime" [min]="minDate"></ion-datetime>
+    </ion-item>
+ 
+    
+  </ion-list>
+ 
+  <button ion-button full icon-left (click)="save()">
+    <ion-icon name="checkmark"></ion-icon> Add Event
+  </button>
+</ion-content>
