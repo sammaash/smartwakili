@@ -19,7 +19,7 @@ export class EventmodPage {
   event_end : string = new Date().toISOString();
   
 
-  event = { startTime: new Date().toISOString(), endTime: new Date().toISOString(), title: String };
+  event = { startTime: new Date().toISOString(), endTime: new Date().toISOString(), title: "" };
   minDate = new Date().toISOString();
   budgetList: AngularFireList<any>;
  
@@ -37,7 +37,7 @@ export class EventmodPage {
  
   save() {
   let data = {
-  event_title : this.event_title,
+  event_title : this.event.title,
   event_partya : this.event_partya,
   event_partyb : this.event_partyb,
   event_purpose: this.event_purpose,

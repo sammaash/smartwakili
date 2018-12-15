@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, ModalController, AlertController } from 'ionic-angular';
 import * as moment from 'moment';
 import { GlobalProvider } from '../../providers/global/global';
-import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 
 
@@ -13,7 +13,7 @@ import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 })
 export class HomePage {
 	
-  eventSource: [];     
+  eventSource = []; 
  	viewTitle: string;
 	selectedDay = new Date();
 
@@ -55,7 +55,7 @@ export class HomePage {
   }
 
   changeMode(mode) {
-        this.calendar.mode = changeMode;
+        this.calendar.mode = mode;
     }
     today() {
         this.calendar.currentDate = new Date();
