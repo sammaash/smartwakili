@@ -12,8 +12,6 @@ import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 })
 export class EventmodPage {
   event_title: string = "";
-  
-  event_title2 : number = 26789;
   event_partya: string = "";
   event_partyb: string = "";
   event_purpose: string = "";
@@ -40,7 +38,6 @@ export class EventmodPage {
   save() {
   let data = {
   event_title : this.event_title,
-  event_title2 : this.event_title2,
   event_partya : this.event_partya,
   event_partyb : this.event_partyb,
   event_purpose: this.event_purpose,
@@ -48,7 +45,13 @@ export class EventmodPage {
   event_end: this.event.endTime
   
   };
-  this.budgetList.push(data);
+  let thenableObj;
+   if (this.globals.firebaseRef != null) {// if we already have Firebase key for this session, use it
+            thenableObj = this.budgetList.set(this.globals.firebaseRef, data); // this.globals.firebaseRef
+        } else {
+            thenableObj = this.budgetList.push(data); // else generate new key and save it as a global variable
+            this.globals.firebaseRef = thenableObj.key;
+        }
 
 this.viewCtrl.dismiss(this.event);
     

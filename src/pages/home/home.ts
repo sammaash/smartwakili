@@ -13,8 +13,8 @@ import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 })
 export class HomePage {
 	
-
-	viewTitle: string;
+  eventSource: [];     
+ 	viewTitle: string;
 	selectedDay = new Date();
 
 
@@ -23,18 +23,13 @@ export class HomePage {
   currentDate: new Date()
 	
 	};
-  eventSource: AngularFireList<any>;     
- 
+  
   constructor(public navCtrl: NavController, private modalCtrl: ModalController, private alertCtrl: AlertController, public globals: GlobalProvider, public afd: AngularFireDatabase) { }
  
-  ionViewDidLoad(){
-       this.eventSource = this.afd.list(`/budget/`,ref => ref.orderByChild('event_title2').equalTo("26789"));
-        Object.keys(this.eventSource).forEach(key=> {
-    console.log(this.eventSource[key]);     
-});
+  
       
     
-}
+
   addEvent() {
     let modal = this.modalCtrl.create('EventmodPage', {selectedDay: this.selectedDay});
     modal.present();
@@ -60,7 +55,7 @@ export class HomePage {
   }
 
   changeMode(mode) {
-        this.calendar.mode = mode;
+        this.calendar.mode = changeMode;
     }
     today() {
         this.calendar.currentDate = new Date();
@@ -71,7 +66,7 @@ export class HomePage {
     let end = moment(event.endTime).format('LLLL');
     
     let alert = this.alertCtrl.create({
-      title: '' + event_title,
+      title: '' + event.title,
       subTitle: 'From: ' + start + '<br>To: ' + end,
       buttons: ['OK']
     })
